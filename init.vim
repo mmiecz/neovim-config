@@ -36,6 +36,9 @@ Plug 'nvim-telescope/telescope.nvim'
 " Use release branch (recommend)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'kyazdani42/nvim-tree.lua'
+
 call plug#end()
 
 let mapleader = ","
@@ -168,3 +171,8 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+
+lua << EOF
+require("nvim-tree").setup()
+EOF
