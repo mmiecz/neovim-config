@@ -1,5 +1,8 @@
 call plug#begin('~/.vim/plugged')
 
+" Theme
+Plug 'dracula/vim'
+
 " Collection of common configurations for the Nvim LSP client
 Plug 'neovim/nvim-lspconfig'
 " Completion framework
@@ -36,8 +39,16 @@ Plug 'nvim-telescope/telescope.nvim'
 " Use release branch (recommend)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Neovim tree
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua'
+
+" Project
+Plug 'ahmedkhalf/project.nvim'
+
+" Telescope fuzzy finder.
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 call plug#end()
 
@@ -174,5 +185,46 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 
 lua << EOF
-require("nvim-tree").setup()
+EOF
+
+set showmatch
+set ignorecase
+set mouse=v
+set hlsearch
+set incsearch
+set tabstop=4
+set softtabstop=4
+set expandtab
+set number
+set wildmode=longest,list
+filetype plugin indent on
+syntax on
+set mouse=a
+set clipboard=unnamedplus
+set cursorline
+set ttyfast
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Project plugin with telescope and nvim-tree integration
+" Vim Script
+let g:nvim_tree_respect_buf_cwd = 1
+
+lua << EOF
+  require("nvim-tree").setup({
+     update_cwd = true,
+      update_focused_file = {
+      enable = true,
+      update_cwd = true
+    },
+  })
+  require("project_nvim").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+  }
+  require('telescope').load_extension('projects')
 EOF
