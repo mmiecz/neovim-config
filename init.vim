@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugged')
 
-" Theme
-Plug 'dracula/vim'
+" Dracula theme
+Plug 'Mofiqul/dracula.nvim'
 
 " Collection of common configurations for the Nvim LSP client
 Plug 'neovim/nvim-lspconfig'
@@ -49,6 +49,11 @@ Plug 'ahmedkhalf/project.nvim'
 " Telescope fuzzy finder.
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+
+" LuaLine
+Plug 'nvim-lualine/lualine.nvim'
+" If you want to have icons in your statusline choose one of these
+Plug 'kyazdani42/nvim-web-devicons'
 
 call plug#end()
 
@@ -210,6 +215,12 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
+"Dracula
+let g:termguicolors = 1
+let g:dracula_show_end_of_buffer = 1  " default false, Turn on or off EndOfBuffer symbol
+let g:dracula_transparent_bg = 1 " default false, enables transparent background
+colorscheme dracula
+
 " Project plugin with telescope and nvim-tree integration
 " Vim Script
 let g:nvim_tree_respect_buf_cwd = 1
@@ -227,4 +238,10 @@ lua << EOF
     -- or leave it empty to use the default settings
   }
   require('telescope').load_extension('projects')
+  require('lualine').setup {
+    options = {
+      theme = 'dracula-nvim'
+    }
+  }
 EOF
+
