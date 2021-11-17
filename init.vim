@@ -221,8 +221,11 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
+" Reset search highlight
+nnoremap <leader>r <cmd>:noh<cr>
 " Key binding for HOP!
 nnoremap <leader>w <cmd>HopWord<cr>
+nnoremap <leader>j <cmd>HopLine<cr>
 
 " Nvim tree toggle
 nnoremap \\ <cmd>NvimTreeToggle<cr>
@@ -252,7 +255,9 @@ lua << EOF
   require('telescope').load_extension('projects')
   require('lualine').setup {
     options = {
-      theme = 'dracula-nvim'
+      theme = 'auto',
+      component_separators = '|',
+      section_separators = '',
     }
   }
   require('hop').setup()
