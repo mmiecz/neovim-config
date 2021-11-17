@@ -1,5 +1,11 @@
 call plug#begin('~/.vim/plugged')
 
+" Hop!
+Plug 'phaazon/hop.nvim'
+
+" GIT
+Plug 'tpope/vim-fugitive'
+
 " Dracula theme
 Plug 'Mofiqul/dracula.nvim'
 
@@ -215,6 +221,12 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
+" Key binding for HOP!
+nnoremap <leader>w <cmd>HopWord<cr>
+
+" Nvim tree toggle
+nnoremap \\ <cmd>NvimTreeToggle<cr>
+
 "Dracula
 let g:termguicolors = 1
 let g:dracula_show_end_of_buffer = 1  " default false, Turn on or off EndOfBuffer symbol
@@ -243,5 +255,5 @@ lua << EOF
       theme = 'dracula-nvim'
     }
   }
+  require('hop').setup()
 EOF
-
