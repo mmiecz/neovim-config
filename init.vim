@@ -26,6 +26,8 @@ Plug 'hrsh7th/cmp-buffer'
 
 " See hrsh7th's other plugins for more completion sources!
 
+" RUST
+Plug 'rust-lang/rust.vim'
 " To enable more of the features of rust-analyzer, such as inlay hints and more!
 Plug 'simrat39/rust-tools.nvim'
 
@@ -60,6 +62,8 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lualine/lualine.nvim'
 " If you want to have icons in your statusline choose one of these
 Plug 'kyazdani42/nvim-web-devicons'
+
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 call plug#end()
 
@@ -221,6 +225,9 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
+" Go to normal mode after pressing ESC in terminal emulator
+tnoremap <Esc> <C-\><C-n>
+
 " Reset search highlight
 nnoremap <leader>r <cmd>:noh<cr>
 " Key binding for HOP!
@@ -243,10 +250,10 @@ let g:nvim_tree_respect_buf_cwd = 1
 lua << EOF
   require("nvim-tree").setup({
      update_cwd = true,
-      update_focused_file = {
-      enable = true,
-      update_cwd = true
-    },
+     update_focused_file = {
+       enable = true,
+       update_cwd = true
+     },
   })
   require("project_nvim").setup {
     -- your configuration comes here
@@ -261,4 +268,14 @@ lua << EOF
     }
   }
   require('hop').setup()
+
+  --indent-blankline.vim
+  vim.opt.list = true
+  --show whitespace
+  vim.opt.listchars:append("space:⋅")
+  require("indent_blankline").setup {
+    show_end_of_line = true,
+    space_char_blankline = " ",
+  }
+  vim.wo.colorcolumn = "99999" --workaround for color bug
 EOF
