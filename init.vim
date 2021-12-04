@@ -65,6 +65,9 @@ Plug 'kyazdani42/nvim-web-devicons'
 
 Plug 'lukas-reineke/indent-blankline.nvim'
 
+" Treesitter: nvim version >= 0.6
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 call plug#end()
 
 let mapleader = ","
@@ -278,4 +281,19 @@ lua << EOF
     space_char_blankline = " ",
   }
   vim.wo.colorcolumn = "99999" --workaround for color bug
+
+  -- treesitter config
+  require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { },  -- list of language that will be disabled
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
 EOF
